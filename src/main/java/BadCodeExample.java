@@ -28,7 +28,7 @@ public class BadCodeExample {
             resultNumber++;
             //searchTerm FOUND if contains Selenium
             //searchTerm NOT FOUND if contains Selenium
-            if (resultText.toLowerCase().contains("searchTerm")) {
+            if (resultText.toLowerCase().contains(searchTerm)) {
                 System.out.println("Search term " + searchTerm + " found");
             } else System.out.println("Search term " + searchTerm + " not found");
             System.out.println(resultText);
