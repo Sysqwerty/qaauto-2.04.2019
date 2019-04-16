@@ -13,11 +13,17 @@ public class LoginTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
-        Assert.assertEquals(driver.getTitle(),"LinkedIn: Войти или зарегистрироваться ", "LinkedIn: Log In or Sign Up ");
+        //check all elements are displayed
+        Assert.assertTrue(driver.findElement(By.xpath("//input[@id='login-email']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//input[@id='login-password']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//input[@id='login-submit']")).isDisplayed());
+        //enter email and login and login to the system
         driver.findElement(By.xpath("//input[@id='login-email']")).sendKeys(userEmail);
         driver.findElement(By.xpath("//input[@id='login-password']")).sendKeys(userPassword);
         driver.findElement(By.xpath("//input[@id='login-submit']")).click();
-        Assert.assertEquals(driver.getTitle(),"LinkedIn");
+        //check user is logged in
+        Assert.assertTrue(driver.findElement(By.xpath("//span[@id='feed-tab-icon']")).isEnabled());
+        //close the browser
         driver.close();
     }
 
