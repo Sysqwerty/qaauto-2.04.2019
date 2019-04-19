@@ -6,11 +6,11 @@ import static java.lang.Thread.sleep;
 
 public class LoginPage {
 
-    WebDriver driver;
-
-    WebElement userEmailField;
-    WebElement userPasswordField;
-    WebElement signInButton;
+    private WebDriver driver;
+    private WebElement userEmailField;
+    private WebElement userPasswordField;
+    private WebElement signInButton;
+    private WebElement regForm;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -21,6 +21,7 @@ public class LoginPage {
         userEmailField = driver.findElement(By.xpath("//input[@id='login-email']"));
         userPasswordField = driver.findElement(By.xpath("//input[@id='login-password']"));
         signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
+        regForm = driver.findElement(By.xpath("//form[@id='regForm']"));
     }
 
     public void login(String userEmail, String userPassword) {
@@ -46,6 +47,10 @@ public class LoginPage {
 
     public boolean isSignInButtonDisplayed() {
         return signInButton.isDisplayed();
+    }
+
+    public boolean isRegFormDisplayed() {
+        return regForm.isDisplayed();
     }
 
 }

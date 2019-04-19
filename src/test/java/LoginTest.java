@@ -12,18 +12,18 @@ public class LoginTest {
 
     @Test
     public void successfulLoginTest() {
-
+        //driver initialization and open start page
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
 
-        LoginPage loginPage = new LoginPage(driver);
-
         //check elements are displayed
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.isUserEmailFieldDisplayed();
         loginPage.isUserPasswordFieldDisplayed();
         loginPage.isSignInButtonDisplayed();
 
+        //enter email and wrong! password and press signIn button
         loginPage.login(userEmail, userPassword);
 
         HomePage homePage = new HomePage(driver);
@@ -38,6 +38,7 @@ public class LoginTest {
 
     @Test
     public void negativeLoginTest1() {
+        //driver initialization and open start page
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
@@ -48,7 +49,7 @@ public class LoginTest {
         loginPage.isUserPasswordFieldDisplayed();
         loginPage.isSignInButtonDisplayed();
 
-        //enter email and wrong! password and login to the system
+        //enter email and wrong! password and press signIn button
         loginPage.login(userEmail, userPasswordWrong);
 
         //check password error is present
@@ -61,21 +62,23 @@ public class LoginTest {
 
     @Test
     public void negativeLoginTest2() {
+        //driver initialization and open start page
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
-        WebElement userEmailField = driver.findElement(By.xpath("//input[@id='login-email']"));
-        WebElement userPasswordField = driver.findElement(By.xpath("//input[@id='login-password']"));
-        WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
+
         //check elements are displayed
-        Assert.assertTrue(userEmailField.isDisplayed());
-        Assert.assertTrue(userPasswordField.isDisplayed());
-        Assert.assertTrue(signInButton.isDisplayed());
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.isUserEmailFieldDisplayed();
+        loginPage.isUserPasswordFieldDisplayed();
+        loginPage.isSignInButtonDisplayed();
+
         // don't enter email and password and press the button to login
-        signInButton.click();
+        loginPage.login("","");
+
         //check nothing is happened and regForm is still displayed
-        WebElement regForm = driver.findElement(By.xpath("//form[@id='regForm']"));
-        Assert.assertTrue(regForm.isDisplayed());
+        Assert.assertTrue(loginPage.isRegFormDisplayed());
+
         //clothe the browser
         driver.quit();
     }
