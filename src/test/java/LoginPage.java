@@ -38,8 +38,6 @@ public class LoginPage {
 
     public boolean isUserEmailFieldDisplayed() {
         return userEmailField.isDisplayed();
-        //Assert.assertTrue(loginPage.userPasswordField.isDisplayed());
-        //Assert.assertTrue(loginPage.signInButton.isDisplayed());
     }
 
     public boolean isUserPasswordFieldDisplayed() {

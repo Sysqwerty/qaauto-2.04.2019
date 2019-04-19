@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 public class LoginTest {
     String userEmail = "alex.tigrovich1@gmail.com";
     String userPassword = "Night2010";
+    String userPasswordWrong = "0.123456789";
 
     @Test
     public void successfulLoginTest() {
@@ -16,10 +17,13 @@ public class LoginTest {
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
 
-        //check elements are displayed
-///////
-
         LoginPage loginPage = new LoginPage(driver);
+
+        //check elements are displayed
+        loginPage.isUserEmailFieldDisplayed();
+        loginPage.isUserPasswordFieldDisplayed();
+        loginPage.isSignInButtonDisplayed();
+
         loginPage.login(userEmail, userPassword);
 
         HomePage homePage = new HomePage(driver);
@@ -37,23 +41,19 @@ public class LoginTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
-        WebElement userEmailField = driver.findElement(By.xpath("//input[@id='login-email']"));
-        WebElement userPasswordField = driver.findElement(By.xpath("//input[@id='login-password']"));
-        WebElement signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
 
         //check elements are displayed
-        Assert.assertTrue(userEmailField.isDisplayed());
-        Assert.assertTrue(userPasswordField.isDisplayed());
-        Assert.assertTrue(signInButton.isDisplayed());
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.isUserEmailFieldDisplayed();
+        loginPage.isUserPasswordFieldDisplayed();
+        loginPage.isSignInButtonDisplayed();
 
         //enter email and wrong! password and login to the system
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys("1234567890");
-        signInButton.click();
+        loginPage.login(userEmail, userPasswordWrong);
 
         //check password error is present
-        WebElement passwordErrorBlock = driver.findElement(By.xpath("//div[@id='error-for-password']"));
-        Assert.assertTrue(passwordErrorBlock.isDisplayed());
+        LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
+        Assert.assertTrue(loginSubmitPage.isPasswordErrorBlockDisplayed());
 
         //close the browser
         driver.quit();
