@@ -1,6 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginTest {
@@ -9,8 +10,19 @@ public class LoginTest {
     private String userPasswordWrong = "0.123456789";
     private String profileName = "Alex Tigrovich";
 
-    @Test
-    public void successfulLoginTest() {
+
+    @DataProvider
+    public Object[][] validDataProvider() {
+        return new Object[][]{
+                { "alex.tigrovich1@gmail.com", "Night2010" },
+                { "alex.TIGrovich1@gmail.COM", "Night2010" }
+
+        };
+    }
+
+    @Test(dataProvider = "validDataProvider")
+    public void successfulLoginTest(String userEmail, String userPassword) {
+
         //driver initialization and open start page
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
@@ -18,17 +30,14 @@ public class LoginTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        //check elements are displayed
-        Assert.assertTrue(loginPage.isUserEmailFieldDisplayed());
-        Assert.assertTrue(loginPage.isUserPasswordFieldDisplayed());
-        Assert.assertTrue(loginPage.isSignInButtonDisplayed());
+        //check login page is loaded
+        Assert.assertTrue(loginPage.isPageLoaded(),"Wrong URL is displayed");
 
         //enter correct email and password and press signIn button
         loginPage.login(userEmail, userPassword);
 
-        HomePage homePage = new HomePage(driver);
-
         //check ProfileMenuItem is displayed on Home page
+        HomePage homePage = new HomePage(driver);
         Assert.assertTrue(homePage.isProfileMenuItemDisplayed());
 
         //click ProfileMenuItem and check profile name text
@@ -40,7 +49,7 @@ public class LoginTest {
     }
 
     @Test
-    public void negativeLoginTest1() {
+    public void wrongPasswordTest() {
         //driver initialization and open start page
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
@@ -48,17 +57,14 @@ public class LoginTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        //check elements are displayed
-        Assert.assertTrue(loginPage.isUserEmailFieldDisplayed());
-        Assert.assertTrue(loginPage.isUserPasswordFieldDisplayed());
-        Assert.assertTrue(loginPage.isSignInButtonDisplayed());
+        //check login page is loaded
+        Assert.assertTrue(loginPage.isPageLoaded(),"Wrong URL is displayed");
 
         //enter correct email and wrong password and press signIn button
         loginPage.login(userEmail, userPasswordWrong);
 
-        LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
-
         //check password error is present
+        LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
         Assert.assertTrue(loginSubmitPage.isPasswordErrorBlockDisplayed());
 
         //close the browser
@@ -66,23 +72,24 @@ public class LoginTest {
     }
 
     @Test
-    public void negativeLoginTest2() {
+    public void emptyCredentialsTest() {
         //driver initialization and open start page
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
 
-        //check elements are displayed
         LoginPage loginPage = new LoginPage(driver);
-        Assert.assertTrue(loginPage.isUserEmailFieldDisplayed());
-        Assert.assertTrue(loginPage.isUserPasswordFieldDisplayed());
-        Assert.assertTrue(loginPage.isSignInButtonDisplayed());
+        //check login page is loaded
+        Assert.assertTrue(loginPage.isPageLoaded(),"Wrong URL is displayed");
 
-        // press signin button without setting user credentials
+        // press signIn button without setting user credentials
         loginPage.login("","");
 
         //check nothing is happened and regForm is still displayed
         Assert.assertTrue(loginPage.isRegFormDisplayed());
+
+        //check URL is still "https://www.linkedin.com/"
+        Assert.assertEquals(driver.getCurrentUrl(),"https://www.linkedin.com/","Wrong URL is displayed");
 
         //close the browser
         driver.quit();

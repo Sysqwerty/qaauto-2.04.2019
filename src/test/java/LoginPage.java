@@ -24,6 +24,10 @@ public class LoginPage {
         regForm = driver.findElement(By.xpath("//form[@id='regForm']"));
     }
 
+    public boolean checkElentsArePresent() {
+        return (userEmailField.isDisplayed() & userPasswordField.isDisplayed() & signInButton.isDisplayed());
+    }
+
     public void login(String userEmail, String userPassword) {
         //enter email and wrong! password and login to the system
         userEmailField.sendKeys(userEmail);
@@ -37,15 +41,15 @@ public class LoginPage {
         }
     }
 
-    public boolean isUserEmailFieldDisplayed() {
+    private boolean isUserEmailFieldDisplayed() {
         return userEmailField.isDisplayed();
     }
 
-    public boolean isUserPasswordFieldDisplayed() {
+    private boolean isUserPasswordFieldDisplayed() {
         return userPasswordField.isDisplayed();
     }
 
-    public boolean isSignInButtonDisplayed() {
+    private boolean isSignInButtonDisplayed() {
         return signInButton.isDisplayed();
     }
 
@@ -53,4 +57,9 @@ public class LoginPage {
         return regForm.isDisplayed();
     }
 
+    public boolean isPageLoaded() {
+        return (driver.getCurrentUrl().equals("https://www.linkedin.com/")
+        && driver.getTitle().contains("LinkedIn:")
+        && isSignInButtonDisplayed());
+    }
 }
