@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 public class LoginTest {
     private String userEmail = "alex.tigrovich1@gmail.com";
     private String userPassword = "Night2010";
-    private String userPasswordWrong = "0.123456789";
     private String profileName = "Alex Tigrovich";
 
 
@@ -48,8 +47,17 @@ public class LoginTest {
         driver.quit();
     }
 
-    @Test
-    public void wrongPasswordTest() {
+    @DataProvider
+    public Object[][] invalidPasswordDataProvider() {
+        return new Object[][]{
+                {"alex.tigrovich1@gmail.com", "0.123456789"},
+                {"alex.tigrovich1@gmail.com", "nIGHT2010"}
+
+        };
+    }
+
+    @Test(dataProvider = "invalidPasswordDataProvider")
+    public void wrongPasswordTest(String userEmail, String userPassword) {
         //driver initialization and open start page
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
@@ -61,7 +69,7 @@ public class LoginTest {
         Assert.assertTrue(loginPage.isPageLoaded(),"Wrong URL is displayed");
 
         //enter correct email and wrong password and press signIn button
-        loginPage.login(userEmail, userPasswordWrong);
+        loginPage.login(userEmail, userPassword);
 
         //check password error is present
         LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
@@ -71,8 +79,16 @@ public class LoginTest {
         driver.quit();
     }
 
-    @Test
-    public void emptyCredentialsTest() {
+    @DataProvider
+    public Object[][] emptyCredentialsDataProvider() {
+        return new Object[][]{
+                {"", ""}
+
+        };
+    }
+
+    @Test(dataProvider = "emptyCredentialsDataProvider")
+    public void emptyCredentialsTest(String userEmail, String userPassword) {
         //driver initialization and open start page
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
@@ -83,7 +99,7 @@ public class LoginTest {
         Assert.assertTrue(loginPage.isPageLoaded(),"Wrong URL is displayed");
 
         // press signIn button without setting user credentials
-        loginPage.login("","");
+        loginPage.login(userEmail, userPassword);
 
         //check nothing is happened and regForm is still displayed
         Assert.assertTrue(loginPage.isRegFormDisplayed());
