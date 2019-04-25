@@ -37,7 +37,7 @@ public class LoginTest {
 
         //check ProfileMenuItem is displayed on Home page
         HomePage homePage = new HomePage(driver);
-        Assert.assertTrue(homePage.isProfileMenuItemDisplayed());
+        Assert.assertTrue(homePage.isPageLoaded());
 
         //click ProfileMenuItem and check profile name text
         homePage.clickOnProfileMenuItem();

@@ -59,7 +59,6 @@ public class LoginPage {
 
     public boolean isPageLoaded() {
         return (driver.getCurrentUrl().equals("https://www.linkedin.com/")
-        && driver.getTitle().contains("LinkedIn:")
         && isSignInButtonDisplayed());
     }
 }

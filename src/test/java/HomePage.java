@@ -7,6 +7,7 @@ public class HomePage {
     private WebDriver driver;
     private WebElement profileMenuItem;
     private WebElement profileUserName;
+    private WebElement updateYourProfileLink;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -15,10 +16,7 @@ public class HomePage {
 
     private void initElements() {
         profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-    }
-
-    public boolean isProfileMenuItemDisplayed() {
-        return profileMenuItem.isDisplayed();
+        updateYourProfileLink = driver.findElement(By.xpath("//a[@data-control-name='identity_update_profile']"));
     }
 
     public void clickOnProfileMenuItem() {
@@ -29,4 +27,11 @@ public class HomePage {
         profileUserName = driver.findElement(By.xpath("//ul[@id='nav-settings__dropdown-options']//h3"));
         return profileUserName.getText();
     }
+
+    public boolean isPageLoaded() {
+        return (driver.getCurrentUrl().equals("https://www.linkedin.com/feed/")
+                & updateYourProfileLink.isDisplayed()
+                & profileMenuItem.isDisplayed());
+    }
+
 }
