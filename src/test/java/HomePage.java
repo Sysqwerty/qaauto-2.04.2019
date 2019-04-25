@@ -7,7 +7,7 @@ public class HomePage {
     private WebDriver driver;
     private WebElement profileMenuItem;
     private WebElement profileUserName;
-    private WebElement updateYourProfileLink;
+    private WebElement discoverMoreButton;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -16,7 +16,7 @@ public class HomePage {
 
     private void initElements() {
         profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-        updateYourProfileLink = driver.findElement(By.xpath("//a[@data-control-name='identity_update_profile']"));
+        discoverMoreButton = driver.findElement(By.xpath("//a[@data-control-name='feed_list_discover']"));
     }
 
     public void clickOnProfileMenuItem() {
@@ -30,7 +30,7 @@ public class HomePage {
 
     public boolean isPageLoaded() {
         return (driver.getCurrentUrl().equals("https://www.linkedin.com/feed/")
-                & updateYourProfileLink.isDisplayed()
+                & discoverMoreButton.isDisplayed()
                 & profileMenuItem.isDisplayed());
     }
 

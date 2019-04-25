@@ -5,8 +5,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginTest {
-    private String userEmail = "alex.tigrovich1@gmail.com";
-    private String userPassword = "Night2010";
     private String profileName = "Alex Tigrovich";
 
 
@@ -26,18 +24,16 @@ public class LoginTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
-
+        //initialize a page and check its loaded
         LoginPage loginPage = new LoginPage(driver);
-
-        //check login page is loaded
-        Assert.assertTrue(loginPage.isPageLoaded(),"Wrong URL is displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(),"The page isn't loaded");
 
         //enter correct email and password and press signIn button
         loginPage.login(userEmail, userPassword);
 
-        //check ProfileMenuItem is displayed on Home page
+        //initialize a page and check its loaded
         HomePage homePage = new HomePage(driver);
-        Assert.assertTrue(homePage.isPageLoaded());
+        Assert.assertTrue(homePage.isPageLoaded(),"The page isn't loaded");
 
         //click ProfileMenuItem and check profile name text
         homePage.clickOnProfileMenuItem();
@@ -62,17 +58,18 @@ public class LoginTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
-
+        //initialize a page and check its loaded
         LoginPage loginPage = new LoginPage(driver);
-
-        //check login page is loaded
-        Assert.assertTrue(loginPage.isPageLoaded(),"Wrong URL is displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(),"The page isn't loaded");
 
         //enter correct email and wrong password and press signIn button
         loginPage.login(userEmail, userPassword);
 
-        //check password error is present
+        //initialize a page and check its loaded
         LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
+        Assert.assertTrue(loginSubmitPage.isPageLoaded(),"The page isn't loaded");
+
+        //check password error is present
         Assert.assertTrue(loginSubmitPage.isPasswordErrorBlockDisplayed());
 
         //close the browser
@@ -93,17 +90,15 @@ public class LoginTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com");
         driver.manage().window().maximize();
-
+        //initialize a page and check its loaded
         LoginPage loginPage = new LoginPage(driver);
-        //check login page is loaded
-        Assert.assertTrue(loginPage.isPageLoaded(),"Wrong URL is displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(),"The page isn't loaded");
 
         // press signIn button without setting user credentials
         loginPage.login(userEmail, userPassword);
 
         //check nothing is happened and regForm is still displayed
         Assert.assertTrue(loginPage.isRegFormDisplayed());
-
         //check URL is still "https://www.linkedin.com/"
         Assert.assertEquals(driver.getCurrentUrl(),"https://www.linkedin.com/","Wrong URL is displayed");
 
