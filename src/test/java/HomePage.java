@@ -1,6 +1,9 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static java.lang.Thread.sleep;
 
 class HomePage {
 
@@ -8,6 +11,7 @@ class HomePage {
   private WebElement profileMenuItem;
   private WebElement profileUserName;
   private WebElement discoverMoreButton;
+  private WebElement searchField;
 
   HomePage(WebDriver driver) {
     this.driver = driver;
@@ -34,4 +38,15 @@ class HomePage {
             & profileMenuItem.isDisplayed());
   }
 
+  SearchResultsPage search(String searchText) {
+    searchField = driver.findElement(By.xpath("//div[@id='nav-typeahead-wormhole']//input[@role='combobox']"));
+    searchField.sendKeys(searchText);
+    searchField.sendKeys(Keys.ENTER);
+    try {
+      sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    return new SearchResultsPage(driver);
+  }
 }
