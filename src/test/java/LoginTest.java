@@ -1,29 +1,8 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class LoginTest {
-  private WebDriver driver;
-  private LoginPage loginPage;
-
-  @BeforeMethod
-  public void beforeMethod() {
-    //driver initialization and open start page
-    driver = new ChromeDriver();
-    driver.get("https://www.linkedin.com");
-    driver.manage().window().maximize();
-    loginPage = new LoginPage(driver);
-  }
-
-  @AfterMethod
-  private void afterMethod() {
-    //close the browser
-    driver.quit();
-  }
+public class LoginTest extends BaseTest {
 
   @DataProvider
   public Object[][] validDataProvider() {

@@ -38,12 +38,12 @@ class HomePage {
             & profileMenuItem.isDisplayed());
   }
 
-  SearchResultsPage search(String searchText) {
-    searchField = driver.findElement(By.xpath("//div[@id='nav-typeahead-wormhole']//input[@role='combobox']"));
-    searchField.sendKeys(searchText);
+  SearchResultsPage search(String searchTerm) {
+    searchField = driver.findElement(By.xpath("//form[@id='extended-nav-search']//input[@role='combobox']"));
+    searchField.sendKeys(searchTerm);
     searchField.sendKeys(Keys.ENTER);
     try {
-      sleep(3000);
+      sleep(6000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
