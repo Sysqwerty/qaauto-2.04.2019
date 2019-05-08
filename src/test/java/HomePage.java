@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import static java.lang.Thread.sleep;
 
-class HomePage {
+class HomePage extends BasePage {
 
   private WebDriver driver;
   private WebElement profileMenuItem;
@@ -21,6 +21,7 @@ class HomePage {
   private void initElements() {
     profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
     discoverMoreButton = driver.findElement(By.xpath("//a[@data-control-name='feed_list_discover']"));
+    searchField = driver.findElement(By.xpath("//form[@id='extended-nav-search']//input[@role='combobox']"));
   }
 
   void clickOnProfileMenuItem() {
@@ -34,12 +35,11 @@ class HomePage {
 
   boolean isPageLoaded() {
     return (driver.getCurrentUrl().equals("https://www.linkedin.com/feed/")
-            & discoverMoreButton.isDisplayed()
-            & profileMenuItem.isDisplayed());
+      & discoverMoreButton.isDisplayed()
+      & profileMenuItem.isDisplayed());
   }
 
   SearchResultsPage search(String searchTerm) {
-    searchField = driver.findElement(By.xpath("//form[@id='extended-nav-search']//input[@role='combobox']"));
     searchField.sendKeys(searchTerm);
     searchField.sendKeys(Keys.ENTER);
     try {

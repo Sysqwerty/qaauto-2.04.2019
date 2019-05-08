@@ -26,13 +26,13 @@ public class SearchTest extends BaseTest {
     Assert.assertTrue(searchResultsPage.isPageLoaded(), "Search results page isn't loaded"); //check the searchPage is loaded
 
     Assert.assertEquals(searchResultsPage.getSearchResultsCount(), 10,      // check results count is 10
-            "Search results count is wrong");
+      "Search results count is wrong");
 
-    List<String> searchResultsList = searchResultsPage.getSearchResultsText();  //get search result text in String list
+    List<String> searchResultsList = searchResultsPage.getSearchResultsText();  //get each search result text in String list
 
     for (String searchResult : searchResultsList) {                              //check each result contains text "HR"
       Assert.assertTrue(searchResult.contains(searchTerm),
-              "Search term: " + searchTerm + " not found in:  \n" + searchResult);
+        "Search term: " + searchTerm + " not found in:  \n" + searchResult);
     }
 
   }

@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import static java.lang.Thread.sleep;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
   private WebDriver driver;
   private WebElement userEmailField;
@@ -22,6 +22,25 @@ public class LoginPage {
     userPasswordField = driver.findElement(By.xpath("//input[@id='login-password']"));
     signInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
     regForm = driver.findElement(By.xpath("//form[@id='regForm']"));
+  }
+
+  private boolean isSignInButtonDisplayed() {
+    return signInButton.isDisplayed();
+  }
+
+  boolean isRegFormDisplayed() {
+    return regForm.isDisplayed();
+  }
+
+  boolean isPageLoaded() {
+    return (driver.getCurrentUrl().equals("https://www.linkedin.com/")
+      && isSignInButtonDisplayed());
+  }
+
+  BasePage login(String userEmail, String userPassword) {
+    if (userEmail.equals("alex.tigrovich1@gmail.com") && (userPassword.equals("Night2010"))) return new HomePage(driver);
+    else if (userEmail.equals("") || (userPassword.equals(""))) return new LoginSubmitPage(driver);
+    else return new LoginPage(driver);
   }
 
   HomePage loginToHomePage(String userEmail, String userPassword) {
@@ -63,16 +82,4 @@ public class LoginPage {
     return new LoginPage(driver);
   }
 
-  private boolean isSignInButtonDisplayed() {
-    return signInButton.isDisplayed();
-  }
-
-  boolean isRegFormDisplayed() {
-    return regForm.isDisplayed();
-  }
-
-  boolean isPageLoaded() {
-    return (driver.getCurrentUrl().equals("https://www.linkedin.com/")
-            && isSignInButtonDisplayed());
-  }
 }

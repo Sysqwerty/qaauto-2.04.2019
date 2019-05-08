@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-class SearchResultsPage {
+class SearchResultsPage extends BasePage {
 
   private WebDriver driver;
   private WebElement searchResultsContainer;

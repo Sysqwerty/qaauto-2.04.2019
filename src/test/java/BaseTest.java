@@ -3,7 +3,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class BaseTest {
+public abstract class BaseTest {
 
   protected LoginPage loginPage;
   protected WebDriver driver;
@@ -20,7 +20,7 @@ public class BaseTest {
 
   @AfterMethod
   private void afterMethod() {
-    //close the browser
+    //close the browser instance
     driver.quit();
   }
 

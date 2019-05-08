@@ -2,7 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-class LoginSubmitPage {
+class LoginSubmitPage extends BasePage {
 
   private WebDriver driver;
   private WebElement passwordErrorBlock;
