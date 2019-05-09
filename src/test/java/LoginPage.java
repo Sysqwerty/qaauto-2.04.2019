@@ -38,12 +38,6 @@ public class LoginPage extends BasePage {
   }
 
   BasePage login(String userEmail, String userPassword) {
-    if (userEmail.equals("alex.tigrovich1@gmail.com") && (userPassword.equals("Night2010"))) return new HomePage(driver);
-    else if (userEmail.equals("") || (userPassword.equals(""))) return new LoginSubmitPage(driver);
-    else return new LoginPage(driver);
-  }
-
-  HomePage loginToHomePage(String userEmail, String userPassword) {
     userEmailField.sendKeys(userEmail);
     userPasswordField.sendKeys(userPassword);
     signInButton.click();
@@ -53,33 +47,49 @@ public class LoginPage extends BasePage {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    return new HomePage(driver);
+    if (userEmail.toLowerCase().trim().equals("alex.tigrovich1@gmail.com") && (userPassword.equals("Night2010")))
+      return new HomePage(driver);
+    else if (userEmail.equals("") || (userPassword.equals(""))) return this;
+    else return new LoginSubmitPage(driver);
   }
 
-  LoginSubmitPage loginToSubmitPage(String userEmail, String userPassword) {
-    userEmailField.sendKeys(userEmail);
-    userPasswordField.sendKeys(userPassword);
-    signInButton.click();
-    //wait for 3 sec
-    try {
-      sleep(3000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    return new LoginSubmitPage(driver);
-  }
-
-  LoginPage loginEmpty(String userEmail, String userPassword) {
-    userEmailField.sendKeys(userEmail);
-    userPasswordField.sendKeys(userPassword);
-    signInButton.click();
-    //wait for 3 sec
-    try {
-      sleep(3000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    return new LoginPage(driver);
-  }
+//  HomePage loginToHomePage(String userEmail, String userPassword) {
+//    userEmailField.sendKeys(userEmail);
+//    userPasswordField.sendKeys(userPassword);
+//    signInButton.click();
+//    //wait for 3 sec
+//    try {
+//      sleep(3000);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+//    return new HomePage(driver);
+//  }
+//
+//  LoginSubmitPage loginToSubmitPage(String userEmail, String userPassword) {
+//    userEmailField.sendKeys(userEmail);
+//    userPasswordField.sendKeys(userPassword);
+//    signInButton.click();
+//    //wait for 3 sec
+//    try {
+//      sleep(3000);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+//    return new LoginSubmitPage(driver);
+//  }
+//
+//  LoginPage loginEmpty(String userEmail, String userPassword) {
+//    userEmailField.sendKeys(userEmail);
+//    userPasswordField.sendKeys(userPassword);
+//    signInButton.click();
+//    //wait for 3 sec
+//    try {
+//      sleep(3000);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+//    return new LoginPage(driver);
+//  }
 
 }

@@ -18,14 +18,13 @@ public class LoginTest extends BaseTest {
     Assert.assertTrue(loginPage.isPageLoaded(), "The page isn't loaded");
 
     //enter correct email and password and press signIn button
-    HomePage homePage = loginPage.loginToHomePage(userEmail, userPassword);
+    HomePage homePage = (HomePage) loginPage.login(userEmail, userPassword);
     Assert.assertTrue(homePage.isPageLoaded(), "The page isn't loaded");
 
     //click ProfileMenuItem and check profile name text
     homePage.clickOnProfileMenuItem();
     Assert.assertEquals(homePage.getProfileUserNameText(), "Alex Tigrovich");
   }
-
 
   @DataProvider
   public Object[][] emptyCredentialsDataProvider() {
@@ -37,7 +36,7 @@ public class LoginTest extends BaseTest {
   @Test(dataProvider = "emptyCredentialsDataProvider")
   public void emptyCredentialsTest(String userEmail, String userPassword) {
     Assert.assertTrue(loginPage.isPageLoaded(), "The page isn't loaded");
-    loginPage.loginEmpty(userEmail, userPassword);  // press signIn button without setting user credentials
+    loginPage.login(userEmail, userPassword);  // press signIn button without setting user credentials
     Assert.assertTrue(loginPage.isRegFormDisplayed());  //check nothing is happened and regForm is still displayed
     Assert.assertEquals(driver.getCurrentUrl(), "https://www.linkedin.com/", "Wrong URL is displayed"); //check URL is still "https://www.linkedin.com/"
   }
@@ -55,7 +54,7 @@ public class LoginTest extends BaseTest {
   public void wrongCredentialsTest(String userEmail, String userPassword,
                                    String emailErrorMessage, String passwordErrorMessage) {
     Assert.assertTrue(loginPage.isPageLoaded(), "The page isn't loaded");
-    LoginSubmitPage loginSubmitPage = loginPage.loginToSubmitPage(userEmail, userPassword); //wrong pass login
+    LoginSubmitPage loginSubmitPage = (LoginSubmitPage) loginPage.login(userEmail, userPassword); //wrong pass login
     Assert.assertTrue(loginSubmitPage.isPageLoaded(), "The page isn't loaded");
     Assert.assertEquals(loginSubmitPage.getUserEmailValidationMessage(), emailErrorMessage,     //check an error block
       "Wrong email error message");

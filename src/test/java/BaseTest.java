@@ -9,18 +9,19 @@ public abstract class BaseTest {
   protected WebDriver driver;
 
   @BeforeMethod
-  public void beforeMethod() {
-    System.out.println("1st before method");
+  void beforeMethod() {
+    System.out.println("1st before method: Open Chrome browser on Login page");
     //driver initialization and open start page
     driver = new ChromeDriver();
-    driver.get("https://www.linkedin.com");
+    driver.get("https://www.linkedin.com/");
     driver.manage().window().maximize();
     loginPage = new LoginPage(driver);
   }
 
   @AfterMethod
-  private void afterMethod() {
+  void afterMethod() {
     //close the browser instance
+    System.out.println("Closing the browser");
     driver.quit();
   }
 

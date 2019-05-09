@@ -19,7 +19,7 @@ public class SearchTest extends BaseTest {
 
     Assert.assertTrue(loginPage.isPageLoaded(), "Login page isn't loaded");  //check the loginPage is loaded
 
-    HomePage homePage = loginPage.loginToHomePage(userEmail, userPassword);     //login
+    HomePage homePage = (HomePage) loginPage.login(userEmail, userPassword);     //login
     Assert.assertTrue(homePage.isPageLoaded(), "Home page isn't loaded");    //check the homePage is loaded
 
     SearchResultsPage searchResultsPage = homePage.search(searchTerm);          //search the text
