@@ -1,45 +1,47 @@
-import org.openqa.selenium.By;
+package page;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
-class HomePage extends BasePage {
+public class HomePage extends BasePage {
 
-  private WebDriver driver;
+  @FindBy(xpath = "//li[@id='profile-nav-item']")
   private WebElement profileMenuItem;
+
+  @FindBy(xpath = "//ul[@id='nav-settings__dropdown-options']//h3")
   private WebElement profileUserName;
+
+  @FindBy(xpath = "//a[@data-control-name='feed_list_discover']")
   private WebElement discoverMoreButton;
+
+  @FindBy(xpath = "//form[@id='extended-nav-search']//input[@role='combobox']")
   private WebElement searchField;
 
   HomePage(WebDriver driver) {
     this.driver = driver;
-    initElements();
+    PageFactory.initElements(driver, this);
   }
 
-  private void initElements() {
-    profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-    discoverMoreButton = driver.findElement(By.xpath("//a[@data-control-name='feed_list_discover']"));
-    searchField = driver.findElement(By.xpath("//form[@id='extended-nav-search']//input[@role='combobox']"));
-  }
-
-  void clickOnProfileMenuItem() {
+  public void clickOnProfileMenuItem() {
     profileMenuItem.click();
   }
 
-  String getProfileUserNameText() {
-    profileUserName = driver.findElement(By.xpath("//ul[@id='nav-settings__dropdown-options']//h3"));
+  public String getProfileUserNameText() {
     return profileUserName.getText();
   }
 
-  boolean isPageLoaded() {
+  public boolean isPageLoaded() {
     return (driver.getCurrentUrl().equals("https://www.linkedin.com/feed/")
       & discoverMoreButton.isDisplayed()
       & profileMenuItem.isDisplayed());
   }
 
-  SearchResultsPage search(String searchTerm) {
+  public SearchResultsPage search(String searchTerm) {
     searchField.sendKeys(searchTerm);
     searchField.sendKeys(Keys.ENTER);
     try {

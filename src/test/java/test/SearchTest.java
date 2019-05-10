@@ -1,6 +1,10 @@
+package test;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import page.HomePage;
+import page.SearchResultsPage;
 
 import java.util.List;
 
@@ -19,7 +23,7 @@ public class SearchTest extends BaseTest {
 
     Assert.assertTrue(loginPage.isPageLoaded(), "Login page isn't loaded");  //check the loginPage is loaded
 
-    HomePage homePage = (HomePage) loginPage.login(userEmail, userPassword);     //login
+    HomePage homePage = loginPage.login(userEmail, userPassword);     //login
     Assert.assertTrue(homePage.isPageLoaded(), "Home page isn't loaded");    //check the homePage is loaded
 
     SearchResultsPage searchResultsPage = homePage.search(searchTerm);          //search the text
@@ -34,7 +38,5 @@ public class SearchTest extends BaseTest {
       Assert.assertTrue(searchResult.contains(searchTerm),
         "Search term: " + searchTerm + " not found in:  \n" + searchResult);
     }
-
   }
-
 }

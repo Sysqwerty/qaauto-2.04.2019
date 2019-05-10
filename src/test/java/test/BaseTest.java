@@ -1,12 +1,14 @@
+package test;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import page.LoginPage;
 
-public abstract class BaseTest {
-
-  protected LoginPage loginPage;
+abstract class BaseTest {
   protected WebDriver driver;
+  LoginPage loginPage;
 
   @BeforeMethod
   void beforeMethod() {
@@ -24,5 +26,4 @@ public abstract class BaseTest {
     System.out.println("Closing the browser");
     driver.quit();
   }
-
 }

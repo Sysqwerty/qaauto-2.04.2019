@@ -1,32 +1,32 @@
-import org.openqa.selenium.By;
+package page;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class SearchResultsPage extends BasePage {
+public class SearchResultsPage extends BasePage {
 
-  private WebDriver driver;
+  @FindBy(xpath = "//div[@class='search-results-container']")
   private WebElement searchResultsContainer;
+
+  @FindBy(xpath = "//li[contains(@class,'search-result search-result__occluded-item')]")
   private List<WebElement> searchResultElements;
 
   SearchResultsPage(WebDriver driver) {
     this.driver = driver;
-    initElements();
+    PageFactory.initElements(driver, this);
   }
 
-  private void initElements() {
-    searchResultsContainer = driver.findElement(By.xpath("//div[@class='search-results-container']"));
-    searchResultElements = driver.findElements(By.xpath("//li[contains(@class,'search-result search-result__occluded-item')]"));
-  }
-
-  boolean isPageLoaded() {
+  public boolean isPageLoaded() {
     return searchResultsContainer.isDisplayed();
   }
 
-  int getSearchResultsCount() {
+  public int getSearchResultsCount() {
     return searchResultElements.size();
   }
 
