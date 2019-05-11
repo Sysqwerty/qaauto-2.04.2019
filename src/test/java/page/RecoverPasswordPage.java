@@ -28,7 +28,7 @@ public class RecoverPasswordPage extends BasePage {
     return new RecoverPasswordNextPage(driver);
   }
 
-  public RecoverPasswordPage setEmailToRecover(String recoverEmail) {
+  public RecoverPasswordPage setRecoverEmail(String recoverEmail) {
     inputEmailOrPhoneField.sendKeys(recoverEmail);
     return this;
   }

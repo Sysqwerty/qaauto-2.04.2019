@@ -21,12 +21,12 @@ public class SetNewPasswordPage extends BasePage {
     PageFactory.initElements(driver, this);
   }
 
-  public ConfirmSubmitPage senNewPasswordAndSubmit(String newPassword) {
+  public ConfirmSubmitPage setNewPasswordAndSubmit(String newPassword) {
     newPasswordField.sendKeys(newPassword);
     confirmPassword.sendKeys(newPassword);
     submitButton.click();
     try {
-      Thread.sleep(2000);
+      Thread.sleep(3000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }

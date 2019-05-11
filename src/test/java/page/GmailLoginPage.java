@@ -21,6 +21,14 @@ public class GmailLoginPage extends BasePage {
     PageFactory.initElements(driver, this);
   }
 
+  public SetNewPasswordPage clickResetMyPasswordLink(String GMAIL_USER_EMAIL, String GMAIL_USER_PASSWORD) {
+    driver.get("http://mail.google.com");
+    GmailHomePage gmailHomePage = login(GMAIL_USER_EMAIL, GMAIL_USER_PASSWORD);
+    EmailPage emailPage = gmailHomePage.openRecoverMail();
+    emailPage.clickResetMyPasswordLink();
+    return new SetNewPasswordPage(driver);
+  }
+
   public GmailHomePage login(String gmailUserEmail, String gmailUserPassword) {
     emailField.sendKeys(gmailUserEmail);
     submitButton.click();

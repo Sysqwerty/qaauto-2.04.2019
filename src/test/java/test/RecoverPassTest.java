@@ -16,7 +16,7 @@ public class RecoverPassTest extends BaseTest {
 
   @Test
   public void RecoverPassTest() {
-    String userEmail = "alex.tigrovich1@gmail.com";
+    final String LINKEDIN_USER_EMAIL = "alex.tigrovich1@gmail.com";
     String newPassword = "Night2010";
     final String GMAIL_USER_EMAIL = "alex.tigrovich1@gmail.com";
     final String GMAIL_USER_PASSWORD = "Night2010";
@@ -26,24 +26,26 @@ public class RecoverPassTest extends BaseTest {
     RecoverPasswordPage recoverPasswordPage = loginPage.clickForgotPassLink();
     Assert.assertTrue(recoverPasswordPage.isPageLoaded());
 
-    RecoverPasswordNextPage recoverPasswordNextPage = recoverPasswordPage.setEmailToRecover(userEmail).clickSubmitButton();
+    RecoverPasswordNextPage recoverPasswordNextPage = recoverPasswordPage.setRecoverEmail(LINKEDIN_USER_EMAIL).clickSubmitButton();
     Assert.assertTrue(recoverPasswordNextPage.isPageLoaded());
 
-    driver.get("http://mail.google.com");
+//    driver.get("http://mail.google.com");
 
     GmailLoginPage gmailLoginPage = new GmailLoginPage(driver);
     Assert.assertTrue(gmailLoginPage.isPageLoaded());
 
-    GmailHomePage gmailHomePage = gmailLoginPage.login(GMAIL_USER_EMAIL, GMAIL_USER_PASSWORD);
-    Assert.assertTrue(gmailHomePage.isPageLoaded());
+//    GmailHomePage gmailHomePage = gmailLoginPage.login(GMAIL_USER_EMAIL, GMAIL_USER_PASSWORD);
+//    Assert.assertTrue(gmailHomePage.isPageLoaded());
+//
+//    EmailPage emailPage = gmailHomePage.openRecoverMail();
+//    Assert.assertTrue(emailPage.isPageLoaded());
+//
+//    SetNewPasswordPage setNewPasswordPage = emailPage.clickResetMyPasswordLink();
 
-    EmailPage emailPage = gmailHomePage.openRecoverMail();
-    Assert.assertTrue(emailPage.isPageLoaded());
-
-    SetNewPasswordPage setNewPasswordPage = emailPage.clickResetMyPasswordLink();
+    SetNewPasswordPage setNewPasswordPage = gmailLoginPage.clickResetMyPasswordLink(GMAIL_USER_EMAIL, GMAIL_USER_PASSWORD);
     Assert.assertTrue(setNewPasswordPage.isPageLoaded());
 
-    ConfirmSubmitPage confirmSubmitPage = setNewPasswordPage.senNewPasswordAndSubmit(newPassword);
+    ConfirmSubmitPage confirmSubmitPage = setNewPasswordPage.setNewPasswordAndSubmit(newPassword);
     Assert.assertTrue(confirmSubmitPage.isPageLoaded());
 
     HomePage homePage = confirmSubmitPage.clickGoToHomepageButton();
