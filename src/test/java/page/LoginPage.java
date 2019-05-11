@@ -21,6 +21,9 @@ public class LoginPage extends BasePage {
   @FindBy(xpath = "//form[@id='regForm']")
   private WebElement regForm;
 
+  @FindBy(xpath = "//a[@class='link-forgot-password']")
+  private WebElement forgotPassLink;
+
   public LoginPage(WebDriver driver) {
     this.driver = driver;
     PageFactory.initElements(driver, this);
@@ -37,6 +40,11 @@ public class LoginPage extends BasePage {
   public boolean isPageLoaded() {
     return (driver.getCurrentUrl().equals("https://www.linkedin.com/")
       && isSignInButtonDisplayed());
+  }
+
+  public RecoverPasswordPage clickForgotPassLink() {
+    forgotPassLink.click();
+    return new RecoverPasswordPage(driver);
   }
 
   public <GenericPage> GenericPage login(String userEmail, String userPassword) {
