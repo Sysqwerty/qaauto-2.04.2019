@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import util.GMailService;
 
-import java.net.URLEncoder;
-
 public class RequestPasswordResetPage extends BasePage {
 
   @FindBy(xpath = "//input[@name='userName']")
@@ -29,9 +27,12 @@ public class RequestPasswordResetPage extends BasePage {
     GMailService gMailService = new GMailService();
     gMailService.connect();
     submitButton.click();
-    String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
-    String messageEncoded = URLEncoder.encode(message);
-    System.out.println("Content: " + message + "\n\n" + messageEncoded);
+    String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180).replace("&amp;", "&");
+    System.out.println("Content: " + message);
+    int indexOf = message.lastIndexOf("5;\"><a href=\"");
+    int lastIndexOf = message.lastIndexOf("\" style=\"");
+    messageResetURL = message.substring(indexOf, lastIndexOf);
+    System.out.println("Reset URL: " + messageResetURL);
 
     return new RequestPasswordResetSubmitPage(driver);
   }
