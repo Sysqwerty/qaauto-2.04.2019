@@ -42,9 +42,9 @@ public class LoginPage extends BasePage {
       && isSignInButtonDisplayed());
   }
 
-  public RecoverPasswordPage clickForgotPassLink() {
+  public RequestPasswordResetPage clickForgotPassLink() {
     forgotPassLink.click();
-    return new RecoverPasswordPage(driver);
+    return new RequestPasswordResetPage(driver);
   }
 
   public <GenericPage> GenericPage login(String userEmail, String userPassword) {
