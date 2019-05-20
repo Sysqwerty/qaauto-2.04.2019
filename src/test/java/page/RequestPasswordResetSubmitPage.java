@@ -21,4 +21,9 @@ public class RequestPasswordResetSubmitPage extends BasePage {
   public boolean isPageLoaded() {
     return resendLinkButton.isDisplayed();
   }
+
+  public SetNewPasswordPage navigateToLinkFromEmail() {
+    driver.get(messageResetURL);
+    return new SetNewPasswordPage(driver);
+  }
 }
