@@ -22,7 +22,14 @@ public class RequestPasswordResetSubmitPage extends BasePage {
     return resendLinkButton.isDisplayed();
   }
 
-  public SetNewPasswordPage navigateToLinkFromEmail() {
+  public SetNewPasswordPage navigateToLinkFromEmail(String userEmail) {
+    String messageSubject = "the link to reset your password";
+    String messageTo = userEmail;
+    String messageFrom = "security-noreply@linkedin.com";
+
+    String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180).replace("&amp;", "&");
+    System.out.println("Content: " + message);
+    String resetPasswordLink = message.substring(message.indexOf("https://www.linkedin.com/e/v2?e="), message.indexOf("_sig=") + 19);
     driver.get(resetPasswordLink);
     return new SetNewPasswordPage(driver);
   }

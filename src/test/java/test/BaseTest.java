@@ -15,8 +15,10 @@ abstract class BaseTest {
     System.out.println("1st before method: Open Chrome browser on Login page");
     //driver initialization and open start page
     driver = new ChromeDriver();
+    driver.manage().deleteAllCookies();
     driver.get("https://www.linkedin.com/");
     driver.manage().window().maximize();
+
     loginPage = new LoginPage(driver);
   }
 
@@ -24,6 +26,7 @@ abstract class BaseTest {
   void afterMethod() {
     //close the browser instance
     System.out.println("Closing the browser");
+    driver.manage().deleteAllCookies();
     driver.quit();
   }
 }

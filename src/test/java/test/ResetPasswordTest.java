@@ -1,18 +1,11 @@
 package test;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import page.*;
 
 public class ResetPasswordTest extends BaseTest {
-  final private static String LINKEDIN_USER_EMAIL = "alex.tigrovich1@gmail.com";
-
-  @AfterMethod
-  @Override
-  void afterMethod() {
-    System.out.println("after");
-  }
+  final private static String USER_EMAIL = "alex.tigrovich1@gmail.com";
 
   @Test
   public void RecoverPassTest() {
@@ -23,10 +16,10 @@ public class ResetPasswordTest extends BaseTest {
     RequestPasswordResetPage requestPasswordResetPage = loginPage.clickForgotPassLink();
     Assert.assertTrue(requestPasswordResetPage.isPageLoaded());
 
-    RequestPasswordResetSubmitPage requestPasswordResetSubmitPage = requestPasswordResetPage.findAccount(LINKEDIN_USER_EMAIL);
+    RequestPasswordResetSubmitPage requestPasswordResetSubmitPage = requestPasswordResetPage.findAccount(USER_EMAIL);
     Assert.assertTrue(requestPasswordResetSubmitPage.isPageLoaded());
 
-    SetNewPasswordPage setNewPasswordPage = requestPasswordResetSubmitPage.navigateToLinkFromEmail();
+    SetNewPasswordPage setNewPasswordPage = requestPasswordResetSubmitPage.navigateToLinkFromEmail(USER_EMAIL);
     Assert.assertTrue(setNewPasswordPage.isPageLoaded());
 
     ConfirmSubmitPage confirmSubmitPage = setNewPasswordPage.setNewPasswordAndSubmit(newPassword);
