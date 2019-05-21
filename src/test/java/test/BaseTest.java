@@ -14,10 +14,10 @@ abstract class BaseTest {
   protected WebDriver driver;
   LoginPage loginPage;
 
-  @Parameters("browserName")
+  @Parameters({"browserName", "locale"})
   @BeforeMethod
-  void beforeMethod(@Optional("chrome") String browserName) throws Exception {
-    System.out.println("1st before method: Open Chrome browser on Login page");
+  void beforeMethod(@Optional("chrome") String browserName, @Optional("en") String locale) throws Exception {
+    System.out.println("@BeforeMethod: Open a browser on the Login page");
     //driver initialization and open start page
     if (browserName.toLowerCase().equals("chrome")) {
       WebDriverManager.chromedriver().setup();
@@ -31,7 +31,12 @@ abstract class BaseTest {
 
 
     driver.manage().deleteAllCookies();
-    driver.get("https://www.linkedin.com/");
+
+    if (locale.toLowerCase().equals("en")) driver.get("https://linkedin.com/");
+    else if (locale.toLowerCase().equals("ua")) driver.get("https://ua.linkedin.com/");
+    else if (locale.toLowerCase().equals("de")) driver.get("https://de.linkedin.com/");
+    else throw new Exception("Unsupported 'locale'");
+
     driver.manage().window().maximize();
     loginPage = new LoginPage(driver);
   }
@@ -39,7 +44,7 @@ abstract class BaseTest {
   @AfterMethod
   void afterMethod() {
     //close the browser instance
-    System.out.println("Closing the browser");
+    System.out.println("@AfterMethod: closing the browser");
     driver.manage().deleteAllCookies();
     driver.quit();
   }

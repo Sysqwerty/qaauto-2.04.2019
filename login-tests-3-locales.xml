@@ -1,0 +1,39 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<!--en de ua-->
+
+<suite name="Login Test Suite" verbose="1">
+    <test name="Locale EN">
+        <parameter name="locale" value="en"/>
+        <classes>
+            <class name="test.LoginTest">
+                <methods>
+                    <include name="successfulLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Locale DE">
+        <parameter name="locale" value="de"/>
+        <classes>
+            <class name="test.LoginTest">
+                <methods>
+                    <include name="successfulLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Locale UA">
+        <parameter name="locale" value="ua"/>
+        <classes>
+            <class name="test.LoginTest">
+                <methods>
+                    <include name="successfulLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

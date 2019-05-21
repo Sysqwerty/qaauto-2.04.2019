@@ -1,7 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<!--en de ua-->
-
 <suite name="Login Test Suite" verbose="1">
     <test name="Firefox">
         <parameter name="browserName" value="Firefox"/>

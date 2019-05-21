@@ -12,8 +12,8 @@ public class LoginTest extends BaseTest {
   public Object[][] validDataProvider() {
     return new Object[][]{
       {"alex.tigrovich1@gmail.com", "Night2010"},
-      {"  alex.tigrovich1@gmail.com  ", "Night2010"},
-      {"alex.TIGrovich1@gmail.COM", "Night2010"}
+//      {"  alex.tigrovich1@gmail.com  ", "Night2010"},
+//      {"alex.TIGrovich1@gmail.COM", "Night2010"}
     };
   }
 

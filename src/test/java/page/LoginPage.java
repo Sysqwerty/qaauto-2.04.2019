@@ -38,8 +38,7 @@ public class LoginPage extends BasePage {
   }
 
   public boolean isPageLoaded() {
-    return (driver.getCurrentUrl().equals("https://www.linkedin.com/")
-      && isSignInButtonDisplayed());
+    return (driver.getCurrentUrl().endsWith("linkedin.com/") && isSignInButtonDisplayed());
   }
 
   public RequestPasswordResetPage clickForgotPassLink() {
