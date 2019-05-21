@@ -41,7 +41,7 @@ public class ResetPasswordTest extends BaseTest {
 1. open login page
 2. click forgot password
 3. set email into input field and click submit button
-4. Open email and get recover link from the mail
+4. get recover link from the mail
 5. open the link in a new tab
 6. sen new password and confirm
     ===THE END=== */

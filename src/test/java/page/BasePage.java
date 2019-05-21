@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 public abstract class BasePage {
   protected WebDriver driver;
-  static protected String messageResetURL;
+  static protected String resetPasswordLink;
 
   protected abstract boolean isPageLoaded();
 }

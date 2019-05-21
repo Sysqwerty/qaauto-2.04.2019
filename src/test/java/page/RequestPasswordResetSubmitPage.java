@@ -23,7 +23,7 @@ public class RequestPasswordResetSubmitPage extends BasePage {
   }
 
   public SetNewPasswordPage navigateToLinkFromEmail() {
-    driver.get(messageResetURL);
+    driver.get(resetPasswordLink);
     return new SetNewPasswordPage(driver);
   }
 }
