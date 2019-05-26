@@ -33,7 +33,7 @@ public class SetNewPasswordPage extends BasePage {
     return new ConfirmSubmitPage(driver);
   }
 
-  public boolean isPageLoaded() {
+  public boolean isPageLoaded(String locale) {
     return (newPasswordField.isDisplayed());
   }
 }

@@ -11,22 +11,22 @@ public class ResetPasswordTest extends BaseTest {
   public void RecoverPassTest() {
     String newPassword = "Night2010";
 
-    Assert.assertTrue(loginPage.isPageLoaded());
+    Assert.assertTrue(loginPage.isPageLoaded(locale));
 
     RequestPasswordResetPage requestPasswordResetPage = loginPage.clickForgotPassLink();
-    Assert.assertTrue(requestPasswordResetPage.isPageLoaded());
+    Assert.assertTrue(requestPasswordResetPage.isPageLoaded(locale));
 
     RequestPasswordResetSubmitPage requestPasswordResetSubmitPage = requestPasswordResetPage.findAccount(USER_EMAIL);
-    Assert.assertTrue(requestPasswordResetSubmitPage.isPageLoaded());
+    Assert.assertTrue(requestPasswordResetSubmitPage.isPageLoaded(locale));
 
     SetNewPasswordPage setNewPasswordPage = requestPasswordResetSubmitPage.navigateToLinkFromEmail(USER_EMAIL);
-    Assert.assertTrue(setNewPasswordPage.isPageLoaded());
+    Assert.assertTrue(setNewPasswordPage.isPageLoaded(locale));
 
     ConfirmSubmitPage confirmSubmitPage = setNewPasswordPage.setNewPasswordAndSubmit(newPassword);
-    Assert.assertTrue(confirmSubmitPage.isPageLoaded());
+    Assert.assertTrue(confirmSubmitPage.isPageLoaded(locale));
 
     HomePage homePage = confirmSubmitPage.clickGoToHomepageButton();
-    Assert.assertTrue(homePage.isPageLoaded());
+    Assert.assertTrue(homePage.isPageLoaded(locale));
   }
 }
 

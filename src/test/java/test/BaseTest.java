@@ -13,10 +13,12 @@ import page.LoginPage;
 abstract class BaseTest {
   protected WebDriver driver;
   LoginPage loginPage;
+  protected String locale;
 
   @Parameters({"browserName", "locale"})
   @BeforeMethod
   void beforeMethod(@Optional("chrome") String browserName, @Optional("en") String locale) throws Exception {
+    this.locale = locale;
     System.out.println("@BeforeMethod: Open a browser on the Login page");
     //driver initialization and open start page
     if (browserName.toLowerCase().equals("chrome")) {
@@ -28,8 +30,6 @@ abstract class BaseTest {
     } else {
       throw new Exception("Unsupported 'browserName'");
     }
-
-
     driver.manage().deleteAllCookies();
 
     if (locale.toLowerCase().equals("en")) driver.get("https://linkedin.com/");
@@ -43,7 +43,7 @@ abstract class BaseTest {
 
   @AfterMethod
   void afterMethod() {
-    //close the browser instance
+    //close the browser (all TABs)
     System.out.println("@AfterMethod: closing the browser");
     driver.manage().deleteAllCookies();
     driver.quit();

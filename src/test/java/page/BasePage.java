@@ -7,5 +7,5 @@ public abstract class BasePage {
   protected WebDriver driver;
   protected static GMailService gMailService = new GMailService();
 
-  protected abstract boolean isPageLoaded();
+  protected abstract boolean isPageLoaded(String locale);
 }

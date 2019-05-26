@@ -20,7 +20,7 @@ public class ConfirmSubmitPage extends BasePage {
     return new HomePage(driver);
   }
 
-  public boolean isPageLoaded() {
+  public boolean isPageLoaded(String locale) {
     return (goToHomepageButton.isDisplayed());
   }
 }

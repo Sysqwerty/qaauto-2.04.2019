@@ -15,13 +15,13 @@ public class SearchTest extends BaseTest {
     String userPassword = "Night2010";
     String searchTerm = "HR";
 
-    Assert.assertTrue(loginPage.isPageLoaded(), "Login page isn't loaded");  //check the loginPage is loaded
+    Assert.assertTrue(loginPage.isPageLoaded(locale), "Login page isn't loaded");  //check the loginPage is loaded
 
     HomePage homePage = loginPage.login(userEmail, userPassword);     //login
-    Assert.assertTrue(homePage.isPageLoaded(), "Home page isn't loaded");    //check the homePage is loaded
+    Assert.assertTrue(homePage.isPageLoaded(locale), "Home page isn't loaded");    //check the homePage is loaded
 
     SearchResultsPage searchResultsPage = homePage.search(searchTerm);          //search the text
-    Assert.assertTrue(searchResultsPage.isPageLoaded(), "Search results page isn't loaded"); //check the searchPage is loaded
+    Assert.assertTrue(searchResultsPage.isPageLoaded(locale), "Search results page isn't loaded"); //check the searchPage is loaded
 
     Assert.assertEquals(searchResultsPage.getSearchResultsCount(), 10,      // check results count is 10
       "Search results count is wrong");

@@ -29,6 +29,12 @@ public class LoginPage extends BasePage {
     PageFactory.initElements(driver, this);
   }
 
+  public String getRequiredPageURL(String locale) {
+    if (locale.toLowerCase().equals("ua")) return "https://ua.linkedin.com/";
+    else if (locale.toLowerCase().equals("de")) return "https://de.linkedin.com/";
+    else return "https://www.linkedin.com/";
+  }
+
   private boolean isSignInButtonDisplayed() {
     return signInButton.isDisplayed();
   }
@@ -37,8 +43,15 @@ public class LoginPage extends BasePage {
     return regForm.isDisplayed();
   }
 
-  public boolean isPageLoaded() {
-    return (driver.getCurrentUrl().endsWith("linkedin.com/") && isSignInButtonDisplayed());
+  public boolean isPageLoaded(String locale) {
+    if (locale.toLowerCase().equals("en")) {
+      return (driver.getCurrentUrl().equals("https://www.linkedin.com/") && isSignInButtonDisplayed());
+    } else if (locale.toLowerCase().equals("de")) {
+      System.out.println(driver.getCurrentUrl());
+      return (driver.getCurrentUrl().equals("https://de.linkedin.com/") && isSignInButtonDisplayed());
+    } else if (locale.toLowerCase().equals("ua")) {
+      return (driver.getCurrentUrl().equals("https://ua.linkedin.com/") && isSignInButtonDisplayed());
+    } else return false;
   }
 
   public RequestPasswordResetPage clickForgotPassLink() {
@@ -46,7 +59,7 @@ public class LoginPage extends BasePage {
     return new RequestPasswordResetPage(driver);
   }
 
-  public <GenericPage> GenericPage login(String userEmail, String userPassword) {
+  public <GenericPage extends BasePage> GenericPage login(String userEmail, String userPassword) {
     userEmailField.sendKeys(userEmail);
     userPasswordField.sendKeys(userPassword);
     signInButton.click();

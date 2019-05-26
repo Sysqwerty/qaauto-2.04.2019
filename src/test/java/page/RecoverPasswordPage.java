@@ -33,7 +33,7 @@ public class RecoverPasswordPage extends BasePage {
     return this;
   }
 
-  public boolean isPageLoaded() {
+  public boolean isPageLoaded(String locale) {
     return submitButton.isDisplayed();
   }
 }

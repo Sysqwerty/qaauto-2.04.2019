@@ -22,7 +22,7 @@ public class SearchResultsPage extends BasePage {
     PageFactory.initElements(driver, this);
   }
 
-  public boolean isPageLoaded() {
+  public boolean isPageLoaded(String locale) {
     return searchResultsContainer.isDisplayed();
   }
 

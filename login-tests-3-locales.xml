@@ -3,23 +3,13 @@
 <!--en de ua-->
 
 <suite name="Login Test Suite" verbose="1">
+
     <test name="Locale EN">
         <parameter name="locale" value="en"/>
         <classes>
             <class name="test.LoginTest">
                 <methods>
-                    <include name="successfulLoginTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="Locale DE">
-        <parameter name="locale" value="de"/>
-        <classes>
-            <class name="test.LoginTest">
-                <methods>
-                    <include name="successfulLoginTest"/>
+                    <include name="wrongCredentialsTest"/>
                 </methods>
             </class>
         </classes>
@@ -30,7 +20,18 @@
         <classes>
             <class name="test.LoginTest">
                 <methods>
-                    <include name="successfulLoginTest"/>
+                    <include name="wrongCredentialsTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Locale DE">
+        <parameter name="locale" value="de"/>
+        <classes>
+            <class name="test.LoginTest">
+                <methods>
+                    <include name="wrongCredentialsTest"/>
                 </methods>
             </class>
         </classes>

@@ -35,7 +35,7 @@ public class HomePage extends BasePage {
     return profileUserName.getText();
   }
 
-  public boolean isPageLoaded() {
+  public boolean isPageLoaded(String locale) {
     return (driver.getCurrentUrl().equals("https://www.linkedin.com/feed/")
       & discoverMoreButton.isDisplayed()
       & profileMenuItem.isDisplayed());

@@ -25,7 +25,7 @@ public class RequestPasswordResetPage extends BasePage {
     return new RequestPasswordResetSubmitPage(driver);
   }
 
-  public boolean isPageLoaded() {
+  public boolean isPageLoaded(String locale) {
     return submitButton.isDisplayed();
   }
 }
