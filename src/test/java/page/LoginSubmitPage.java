@@ -26,32 +26,30 @@ public class LoginSubmitPage extends BasePage {
   }
 
   public String getUserEmailValidationMessage() {
-    System.out.println(emailErrorBlock.getText());
     return emailErrorBlock.getText();
   }
 
   public String getUserPasswordValidationMessage() {
-    System.out.println(passwordErrorBlock.getText());
     return passwordErrorBlock.getText();
   }
 
   public String getRequiredEmailValidationMessage(String locele) {
     if ((locele.toLowerCase().trim().equals("en")) & passwordErrorBlock.getText().equals(""))
       return "Hmm, we don't recognize that email. Please try again.";
-    else if ((locele.toLowerCase().trim().equals("de")) & passwordErrorBlock.getText().equals(""))
-      return "Ihre E-Mail-Adresse wurde nicht erkannt. Versuchen Sie es erneut.";
     else if ((locele.toLowerCase().trim().equals("ua")) & passwordErrorBlock.getText().equals(""))
       return "Hmm, we don't recognize that email. Please try again.";
+    else if ((locele.toLowerCase().trim().equals("de")) & passwordErrorBlock.getText().equals(""))
+      return "Ihre E-Mail-Adresse wurde nicht erkannt. Versuchen Sie es erneut.";
     else return "";
   }
 
   public String getRequiredPasswordValidationMessage(String locele) {
     if ((locele.toLowerCase().trim().equals("en")) & (!passwordErrorBlock.getText().equals("")))
       return "Hmm, we don't recognize that email. Please try again.";
-    else if ((locele.toLowerCase().trim().equals("de")) & (!passwordErrorBlock.getText().equals("")))
-      return "Falsches Passwort. Versuchen Sie es erneut oder fordern Sie ein neues Passwort an.";
     else if ((locele.toLowerCase().trim().equals("ua")) & (!passwordErrorBlock.getText().equals("")))
       return "Hmm, we don't recognize that email. Please try again.";
+    else if ((locele.toLowerCase().trim().equals("de")) & (!passwordErrorBlock.getText().equals("")))
+      return "Falsches Passwort. Versuchen Sie es erneut oder fordern Sie ein neues Passwort an.";
     else return "";
   }
 

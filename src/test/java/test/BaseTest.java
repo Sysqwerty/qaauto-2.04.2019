@@ -30,9 +30,9 @@ abstract class BaseTest {
     } else {
       throw new Exception("Unsupported 'browserName'");
     }
-    driver.manage().deleteAllCookies();
 
-    if (locale.toLowerCase().equals("en")) driver.get("https://linkedin.com/");
+    // open default page depends on provided 'locale'
+    if (locale.toLowerCase().equals("en")) driver.get("https://www.linkedin.com/");
     else if (locale.toLowerCase().equals("ua")) driver.get("https://ua.linkedin.com/");
     else if (locale.toLowerCase().equals("de")) driver.get("https://de.linkedin.com/");
     else throw new Exception("Unsupported 'locale'");
@@ -43,7 +43,7 @@ abstract class BaseTest {
 
   @AfterMethod
   void afterMethod() {
-    //close the browser (all TABs)
+    //close the browser (all browser tabs)
     System.out.println("@AfterMethod: closing the browser");
     driver.manage().deleteAllCookies();
     driver.quit();

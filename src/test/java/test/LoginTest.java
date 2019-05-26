@@ -47,7 +47,7 @@ public class LoginTest extends BaseTest {
   @DataProvider
   public Object[][] invalidCredentialsDataProvider() {
     return new Object[][]{
-      {"alex.tigrovich1@@gmail.com", "Night2010"},//
+      {"alex.tigrovich1@@gmail.com", "Night2010"},
       {"alex.tigrovich1@gmail.com", "Night201"}
     };
   }
