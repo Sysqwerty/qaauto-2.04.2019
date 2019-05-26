@@ -28,17 +28,10 @@ public class LoginTest extends BaseTest {
     Assert.assertEquals(homePage.getProfileUserNameText(), "Alex Tigrovich");
   }
 
-  @DataProvider
-  public Object[][] emptyCredentialsDataProvider() {
-    return new Object[][]{
-      {"", ""}
-    };
-  }
-
-  @Test(dataProvider = "emptyCredentialsDataProvider")
-  public void emptyCredentialsTest(String userEmail, String userPassword) {
+  @Test
+  public void emptyCredentialsTest() {
     Assert.assertTrue(loginPage.isPageLoaded(locale), "Login page isn't loaded");
-    loginPage.login(userEmail, userPassword);           //press signIn button with empty user credentials
+    loginPage.login("", "");           //press signIn button with empty user credentials
     Assert.assertTrue(loginPage.isRegFormDisplayed());  //check nothing is happened and regForm is still displayed
     Assert.assertEquals(driver.getCurrentUrl(), loginPage.getRequiredPageURL(locale),
       "Wrong URL is displayed");                    //check URL isn't changed"
@@ -58,9 +51,11 @@ public class LoginTest extends BaseTest {
     LoginSubmitPage loginSubmitPage = loginPage.login(userEmail, userPassword);
     Assert.assertTrue(loginSubmitPage.isPageLoaded(locale), "Login submit page isn't loaded");
     Assert.assertEquals(loginSubmitPage.getUserEmailValidationMessage(),
-      loginSubmitPage.getRequiredEmailValidationMessage(locale), "Wrong email error message");       //check a mail error block
+      loginSubmitPage.getRequiredEmailValidationMessage(locale),
+      "Wrong email error message");       //check a mail error block
     Assert.assertEquals(loginSubmitPage.getUserPasswordValidationMessage(),
-      loginSubmitPage.getRequiredPasswordValidationMessage(locale), "Wrong password error message"); //check a pass error block
+      loginSubmitPage.getRequiredPasswordValidationMessage(locale),
+      "Wrong password error message"); //check a pass error block
   }
 
 }

@@ -1,17 +1,26 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Login Test Suite" verbose="1">
+
     <test name="Firefox">
         <parameter name="browserName" value="Firefox"/>
         <classes>
-            <class name="test.LoginTest"></class>
+            <class name="test.LoginTest">
+                <!--                <methods>-->
+                <!--                    <include name="wrongCredentialsTest"/>-->
+                <!--                </methods>-->
+            </class>
         </classes>
     </test>
 
     <test name="Chrome">
         <parameter name="browserName" value="Chrome"/>
         <classes>
-            <class name="test.LoginTest"></class>
+            <class name="test.LoginTest">
+                <!--                <methods>-->
+                <!--                    <include name="wrongCredentialsTest"/>-->
+                <!--                </methods>-->
+            </class>
         </classes>
     </test>
 

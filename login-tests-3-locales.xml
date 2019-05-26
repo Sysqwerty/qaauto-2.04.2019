@@ -8,9 +8,9 @@
         <parameter name="locale" value="en"/>
         <classes>
             <class name="test.LoginTest">
-                <methods>
-                    <include name="wrongCredentialsTest"/>
-                </methods>
+                <!--                <methods>-->
+                <!--                    <include name="wrongCredentialsTest"/>-->
+                <!--                </methods>-->
             </class>
         </classes>
     </test>
@@ -19,9 +19,9 @@
         <parameter name="locale" value="ua"/>
         <classes>
             <class name="test.LoginTest">
-                <methods>
-                    <include name="wrongCredentialsTest"/>
-                </methods>
+                <!--                <methods>-->
+                <!--                    <include name="wrongCredentialsTest"/>-->
+                <!--                </methods>-->
             </class>
         </classes>
     </test>
@@ -30,9 +30,9 @@
         <parameter name="locale" value="de"/>
         <classes>
             <class name="test.LoginTest">
-                <methods>
-                    <include name="wrongCredentialsTest"/>
-                </methods>
+                <!--                <methods>-->
+                <!--                    <include name="wrongCredentialsTest"/>-->
+                <!--                </methods>-->
             </class>
         </classes>
     </test>

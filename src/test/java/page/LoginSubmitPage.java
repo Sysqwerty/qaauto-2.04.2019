@@ -45,9 +45,9 @@ public class LoginSubmitPage extends BasePage {
 
   public String getRequiredPasswordValidationMessage(String locele) {
     if ((locele.toLowerCase().trim().equals("en")) & (!passwordErrorBlock.getText().equals("")))
-      return "Hmm, we don't recognize that email. Please try again.";
+      return "Hmm, that's not the right password. Please try again or request a new one.";
     else if ((locele.toLowerCase().trim().equals("ua")) & (!passwordErrorBlock.getText().equals("")))
-      return "Hmm, we don't recognize that email. Please try again.";
+      return "Hmm, that's not the right password. Please try again or request a new one.";
     else if ((locele.toLowerCase().trim().equals("de")) & (!passwordErrorBlock.getText().equals("")))
       return "Falsches Passwort. Versuchen Sie es erneut oder fordern Sie ein neues Passwort an.";
     else return "";
