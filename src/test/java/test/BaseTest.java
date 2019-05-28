@@ -26,7 +26,8 @@ abstract class BaseTest {
   @BeforeMethod
   void beforeMethod(@Optional("chrome") String browserName, @Optional("en") String locale) throws Exception {
     this.locale = locale;
-    System.out.println("@BeforeMethod: Open a browser on the Login page");
+    System.out.println("====================\n@BeforeMethod: Open a browser on the Login page" +
+      "\nBrowser: " + browserName + "\nlocale: " + locale);
     //driver initialization and open start page
     if (browserName.toLowerCase().equals("chrome")) {             //in case Chrome browser
       WebDriverManager.chromedriver().setup();
@@ -41,7 +42,7 @@ abstract class BaseTest {
     } else if (browserName.toLowerCase().equals("firefox")) {     //in case FireFox browser
       WebDriverManager.firefoxdriver().setup();
       FirefoxProfile profile = new FirefoxProfile();
-      profile.setPreference("intl.accept_languages", "ru");        //setting default locale english : 'en'
+      profile.setPreference("intl.accept_languages", "en");        //setting default locale english : 'en'
       FirefoxOptions options = new FirefoxOptions();
       options.setProfile(profile);
       driver = new FirefoxDriver(options);
@@ -62,7 +63,7 @@ abstract class BaseTest {
   @AfterMethod
   void afterMethod() {
     //close the browser (all browser tabs)
-    System.out.println("@AfterMethod: closing the browser");
+    System.out.println("@AfterMethod: closing the browser\n====================");
     driver.manage().deleteAllCookies();
     driver.quit();
   }
